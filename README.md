@@ -1,4 +1,4 @@
-# Cool Interviews and Problems
+# Cool Problems
 Some C++, C and Python problems that I saw during interviews or while preparing for one.
 
 Some code will compile as stand alone project; while the others might need a bit of TLC to compile and work.
