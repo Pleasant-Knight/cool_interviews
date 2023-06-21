@@ -11,5 +11,7 @@ Future Work: will add GoLang, ML and AI sections.
 
 
 # Cool Resources:
-The interactive latencies by Colin Scot (numbers we need to know):
+The interactive latencies by Colin Scott (numbers we need to know):
+
 https://colin-scott.github.io/personal_website/research/interactive_latency.html
+https://github.com/colin-scott/interactive_latencies
