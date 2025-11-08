@@ -361,6 +361,7 @@ Special cases in code are small but deadly. They add:
 
 **🤖 Robotics Lesson**
 In robotics, general-purpose modules lead to cleaner, more flexible architectures:
+
 ❌ Specialized Design:
 A robot’s motion controller has methods like:
  - turn_left()
