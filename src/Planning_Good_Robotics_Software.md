@@ -138,7 +138,7 @@ Design for maintainability:
 
 ## Chapter 4 – Modules Should Be Deep
 
-###🧩 Modular Design, The Foundation of Simplicity:
+### 🧩 Modular Design, The Foundation of Simplicity:
 Good software is composed of deep modules; modules with simple interfaces that conceal rich, complex implementations.
 Modular design is the process of dividing a system into smaller, relatively independent parts (modules), each responsible for a specific piece of functionality. Each module has two parts:
 * Interface: What the module promises to do (the part other modules see).
@@ -161,16 +161,16 @@ By contrast, shallow modules expose too much of their inner workings; their inte
 ### Abstraction and Its Pitfalls
 Each module provides an abstraction, a simplified view that omits unnecessary details. 
 But abstractions can fail in two ways:
- 1- Too detailed: The interface includes things that users don’t need to know (increasing cognitive load).
+ 1. Too detailed: The interface includes things that users don’t need to know (increasing cognitive load).
  → Example: An API that exposes every low-level control flag.
- 1- Too vague: It hides important information that users do need to know, creating confusion and bugs.
+ 1. Too vague: It hides important information that users do need to know, creating confusion and bugs.
 
 The art of design is deciding what really matters and exposing only that.
 “The key to designing abstractions is to understand what is important, and to minimize what’s important.”
 
 ### Classitis — When “Small” Goes Too Far
 Many programmers, especially influenced by object-oriented dogma, believe that: 
-“Classes should be small.”
+*“Classes should be small.”*
 Ousterhout calls this classitis →the mistaken belief that more classes automatically means better design.
 In reality:
  - Too many small, shallow classes increase the number of interfaces.
@@ -180,16 +180,16 @@ In reality:
 This makes simple operations verbose and error-prone → “Small classes don’t contribute much functionality, so there have to be a lot of them… each with its own interface. That’s complexity.”
 
 ### How to Design Deep Modules
-1- Expose less information.
- - The fewer assumptions other modules need to know, the better.
-1- Hide as much as possible.
- - Implementation details, data structures, and internal policies should stay private.
-1- Combine functionality.
- - If multiple related features share information, bring them into the same module.
-1- Favor powerful, general-purpose interfaces.
- - Avoid special-case methods; one method that handles multiple cases is deeper.
-1- Don’t be afraid of big modules — only shallow ones.
- - A large module with a simple interface is better than many small, trivial ones.
+1. Expose less information.
+    - The fewer assumptions other modules need to know, the better.
+1. Hide as much as possible.
+    - Implementation details, data structures, and internal policies should stay private.
+1. Combine functionality.
+    - If multiple related features share information, bring them into the same module.
+1. Favor powerful, general-purpose interfaces.
+    - Avoid special-case methods; one method that handles multiple cases is deeper.
+1. Don’t be afraid of big modules — only shallow ones.
+    - A large module with a simple interface is better than many small, trivial ones.
 
 **Core Ideas**
 
