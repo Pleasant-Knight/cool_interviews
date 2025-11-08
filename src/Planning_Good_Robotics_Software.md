@@ -229,17 +229,73 @@ Make each ROS2 node deep:
 
 ## Chapter 5 – Information Hiding and Leakage
 
+### 🧩 1. Information Hiding — The Core of Deep Design
+Information hiding means encapsulating the details of a design decision within a single module so that no other module depends on it.
+The goal is to make it possible to change those details later without affecting the rest of the system. 
+
+ - **Examples of Information to Hide:**
+    - How data is stored (e.g., internal data structures).
+    - How a protocol works internally.
+    - The format of a file or message.
+    - Configuration policies or performance optimizations.
+ - **When this information is hidden:**
+    - The module’s interface becomes simpler, reducing cognitive load.
+    - Fewer parts of the code need to be modified if something changes.
+    - Complexity becomes localized, not contagious.
+
+### Information Leakage — The Enemy of Modularity
+Information leakage occurs when a design decision is reflected in multiple modules, creating unnecessary dependencies. 
+If that decision changes, all of those modules must change too.
+Examples of Leakage:
+ - Two classes that both know about a shared file format.
+ - APIs that expose internal data structures.
+ - Shared assumptions or duplicated constants.
+
+Leakage is dangerous because:
+ - It ties modules together conceptually.
+ - It increases the surface area of complexity.
+ - It hides dependencies, making bugs harder to track.
+ - “Information leakage is one of the most important red flags in software design. Learn to develop a high sensitivity to it.”
+
+### Common Source of Leakage — Temporal Decomposition
+A classic mistake that causes information leakage is temporal decomposition, structuring the code based on the order of operations, rather than on what knowledge each part should encapsulate.
+Example of a system reads, modifies, and then writes a file:
+ - Bad design: Separate classes for reading and writing→ Both classes must understand the file format (leakage).
+ - Better design: One class handles both reading and writing → The file format knowledge is contained in one place.
+ - “It’s easy to fall into the trap of temporal decomposition, but it almost always leads to information leakage.”
+
+
 **Core Ideas**
 
 * Hide implementation details to allow safe modification.
+    * “Each module should encapsulate a few pieces of knowledge that represent design decisions."
+    * "That knowledge is embedded in the implementation but invisible in the interface.”
 * Leakage (when internals affect other modules) causes fragile systems.
 * Interfaces should reflect *what* not *how*.
+* Balance is key:
+    - Expose what’s necessary, hide everything else. 
+    - “If the information is needed outside the module, you must not hide it. The goal is to minimize what’s needed outside, not to pretend it doesn’t exist.”
+
 
 **Key Takeaway**
 
 > Design modules so they can change internally without breaking anything else.
+> Complexity spreads when knowledge spreads.
+    > Keep each piece of knowledge in one place, hide it there, and your system will stay simple, deep, and adaptable.
+> “If you can hide more information, you can simplify the interface and that makes the module deeper.”
 
 **🤖 Robotics Lesson**
+In robotics, information hiding can dramatically reduce system fragility.
+Example, A motor control subsystem might handle:
+ - PID tuning, torque limits, voltage compensation, and encoder calibration internally.
+ - If other modules (like path planners) know these details, any change in hardware requires rewriting the planner, that’s information leakage.
+
+Better design --> **Expose only high-level commands**:
+ - motor.move_to(angle)
+ - motor.set_speed(velocity)
+ - The internal control logic, feedback loops, and safety features remain hidden.
+ - If the robot switches to a different motor type, the interface stays the same, only the internal module changes.
+
 Sensor drivers should hide hardware specifics:
 
 * Don’t expose serial protocols or bitmasks.
