@@ -1,4 +1,4 @@
-# Planning Good Software for Robotics
+# Planning A Good Robotics Software - By Michel Hanna - Software Engineer
 
 Inspired by *A Philosophy of Software Design (2nd Edition)* by Dr. John Ousterhout
 Integrated with applied lessons for robotics software architecture and intelligent control systems.
@@ -39,6 +39,11 @@ Integrated with applied lessons for robotics software architecture and intellige
 * Two strategies: eliminate complexity and encapsulate what remains.
 * Software design is iterative; reducing complexity is a continuous process.
 
+** Two Ways to Fight Complexity:**
+* Eliminate complexity: make code simpler and more obvious (e.g., avoid special cases, use consistent naming).
+* Encapsulate complexity: isolate it within well-defined modules (modular design), allowing developers to work without knowing the entire system’s details.
+* Complexity should guide every design decision. Simplify and encapsulate relentlessly.
+
 **Key Takeaway**
 
 > Complexity slows progress more than any technical limitation. Every design decision should aim to reduce it.
@@ -57,17 +62,28 @@ Design modules that encapsulate these layers:
 
 **Core Ideas**
 
-* Complexity = what makes code hard to understand or modify.
+* Complexity = Anything related to the structure of a software system that makes it hard to understand and modify the system.
+* Complexity is experienced in what a developer feels when trying to understand, debug, or extend a codebase.
 * Symptoms: change amplification, cognitive load, unknown unknowns.
+* In simple systems, changes are obvious.
+* In complex systems, every change is risky and unpredictable.
 * Root causes: dependencies and obscurity.
+* Complexity Is Incremental, once it has accumulated, removing it is very hard.
+
 
 **Key Takeaway**
 
 > Complexity accumulates quietly; the only cure is to simplify relentlessly.
+> Complexity is the silent killer of progress. 
+> Every design choice either fights complexity or feeds it.
+> Great software design is the art of making change easy
 
 **🤖 Robotics Lesson**
-Reduce hidden dependencies between sensors and controllers:
-
+Robotics complexity often manifests in inter-module dependencies between sensors, planners, & actuators.
+Reduce hidden dependencies between sensors and controllers.
+Suppose each robot subsystem (e.g., camera, motor, navigation) directly depends on others’ internal parameters.
+Changing the camera resolution might break path planning because image scaling logic is buried in multiple modules → change amplification.
+The solution is encapsulation and clarity:
 * Standardize units and coordinate frames across modules.
 * Document assumptions between hardware and algorithms.
 * Avoid coupling calibration data with control logic.
@@ -75,17 +91,38 @@ Reduce hidden dependencies between sensors and controllers:
 
 ---
 
-## Chapter 3 – Working Code Isn’t Enough
+## Chapter 3 – Working Code Isn’t Enough (Strategic vs. Tactical Programming)
 
 **Core Ideas**
 
 * Code that works today may become unmaintainable tomorrow.
 * Design quality matters more in the long run than quick fixes.
 * Short-term optimizations create long-term debt.
+* The goal should be to create clean, maintainable, and extensible designs.
+* Tactical programming focuses on short-term results — getting a feature implemented or a bug fixed as fast as possible.
+* Strategic programming, in contrast, is about investing in the future structure of the system.
+* Most technical debt is never fully repaid; you keep paying forever.
+* Avoid the Startup Trap — “Move Fast and Break Things”
+
+**Reocommendation**: spending 10–20% of your time on design improvement and cleanup, enough to prevent complexity from growing faster than you can control. This includes:
+* Simplifying confusing interfaces.
+* Refactoring redundant or inconsistent code.
+* Improving documentation and comments.
+* Reducing dependencies between modules.
+
+**Strategic Programming in Practice**
+Principles to adopt:
+ - Pause when you see a red flag. Don’t patch over bad design.
+- Refactor continuously. Small cleanups are better than massive rewrites.
+- Think long-term. Ask, “Will this make future changes easier or harder?”
+- Balance practicality with quality. 
+- Don’t over-engineer, but never settle for fragile hacks.
+- “Your primary goal is to produce a great design that also happens to work.”
 
 **Key Takeaway**
 
 > The goal is not just working code, but code that will continue to work easily.
+> “Good design doesn’t come for free, it’s an investment. But it pays for itself, and sooner than you might think.”
 
 **🤖 Robotics Lesson**
 In robotics, a system that “just works” in simulation might fail in the field.
@@ -94,6 +131,7 @@ Design for maintainability:
 * Avoid hardcoded gains or parameters in controllers.
 * Use configuration files for tuning.
 * Implement logging and replay tools for debugging sensor issues later.
+* A strategically designed robot control system lets engineers innovate safely, adding new sensors or motion behaviors without rewriting the core control logic.
 
 ---
 
