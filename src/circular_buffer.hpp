@@ -90,7 +90,7 @@ private:
     }
 
     // Padding on indices helps avoid false sharing (optional but nice).
-    alignas(64) std::atomic<std::size_t> head_{0};
-    alignas(64) std::atomic<std::size_t> tail_{0};
-    alignas(64) std::array<T, CapacityPow2> buf_{};
+    std::atomic<std::size_t> head_{0};
+    std::atomic<std::size_t> tail_{0};
+    std::array<T, CapacityPow2> buf_{};
 };
