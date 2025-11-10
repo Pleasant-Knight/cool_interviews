@@ -1,6 +1,5 @@
 /*
-Task:
-You receive two increasing timestamp streams A and B (ints). Implement an online merger:
+* Task: You receive two increasing timestamp streams A and B (ints). Implement an online merger:
 
 class Merger {
 public:
@@ -11,16 +10,15 @@ public:
   std::optional<int> pop();
 };
 
+* Requirements:
+  - pop() returns the smallest available timestamp, stable across equal times (A before B when ties).
+  - Amortized O(1) per push/pop; O(1) extra space beyond the queues holding unread data.
+  - Prove stability and discuss back-pressure handling.
 
-Requirements:
-    pop() returns the smallest available timestamp, stable across equal times (A before B when ties).
-    Amortized O(1) per push/pop; O(1) extra space beyond the queues holding unread data.
-    Prove stability and discuss back-pressure handling.
-
-  Questions to consider:
-    What if one stream is much faster than the other?
-    How to handle unbounded delays in one stream?
-    Can you extend this to more than two streams?
+* Questions to consider:
+  - What if one stream is much faster than the other?
+  - How to handle unbounded delays in one stream?
+  - Can you extend this to more than two streams?
 */
 
 #include <deque>
