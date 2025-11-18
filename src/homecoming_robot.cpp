@@ -41,6 +41,10 @@ Constraints:
     0 <= startcol, homecol < n
 
  */
+ include <vector>
+#include <iostream>
+
+using namespace std;
 
  class Solution {
 public:
