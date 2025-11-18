@@ -41,12 +41,13 @@ Constraints:
     0 <= startcol, homecol < n
 
  */
- include <vector>
+
+#include <vector>
 #include <iostream>
 
 using namespace std;
 
- class Solution {
+class Solution {
 public:
     int minCost(vector<int>& startPos, vector<int>& homePos, vector<int>& rowCosts, vector<int>& colCosts) {
         int sx = startPos[0], sy = startPos[1];
